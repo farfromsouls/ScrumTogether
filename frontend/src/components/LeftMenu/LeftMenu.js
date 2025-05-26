@@ -1,6 +1,11 @@
 import styles from './LeftMenu.css'
+
 import React, { useState, useEffect } from 'react';
 
+
+function show_table(id) {
+    console.log(id)
+}
 
 export default function LeftMenu() {
 
@@ -18,18 +23,22 @@ export default function LeftMenu() {
             .then((data) => {
                 setTables(data["tables"]);
             });
-    }, []); 
+    }, []);
 
     return (
         <aside style={styles} id="sidebar">
-            sidebar test
+            <p className="sidebar-name">Tables list</p>
+
             {tables.length > 0 && (
                 <ul>
                     {tables.map(table => (
-                        <li key={table.id}><a href={`${"http://127.0.0.1:3000/todo/table/"}${table.id}`}>{table.name}</a></li>
+                        <button id={table.id} onClick={() => { show_table(table.id) }} className="table" key={table.id}>
+                            {table.name}
+                        </button>
                     ))}
                 </ul>
             )}
+
         </aside>
     );
 }

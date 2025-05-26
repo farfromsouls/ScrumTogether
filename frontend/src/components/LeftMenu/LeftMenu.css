@@ -4,8 +4,21 @@ aside {
     position: fixed;
     top: 40px;
     bottom: 40px;
+    width: 250px;
+}
+
+.table {
+    margin: 5px -15px;
+    height: 25px;
     width: 200px;
-    padding: 20px;
+    background-color: rgba(21, 214, 14, 0.432);
+    border-radius: 20px;
+}
+
+.sidebar-name {
+    margin: 20px;
+    text-align: center;
+    top: 10px;
 }
 
 @media (max-width: 768px) {
