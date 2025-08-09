@@ -1,6 +1,6 @@
-# ToDoList
+# Scrum
 
-This is my implementation of the popular ToDoList application. The main technologies I chose for this project are Django, React and Aiogram. In the photos below you can see in detail how this project works and how you can run it yourself.
+This is my implementation of the popular scrum applications. The main technologies I chose for this project are Django, React and Aiogram. In the photos below you can see in detail how this project works and how you can run it yourself.
 
 # Usage
 
