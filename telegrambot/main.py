@@ -4,7 +4,7 @@ import logging
 
 from aiogram import Bot, Dispatcher
 
-from secret import token
+from .secret import TOKEN
 
 
 logging.basicConfig(level=logging.INFO)

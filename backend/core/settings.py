@@ -1,6 +1,7 @@
 from pathlib import Path
-from secret import SECRET_KEY
 from datetime import timedelta
+
+from .secret import SECRET_KEY, PG_NAME, PG_USER, PG_PASSWORD, PG_HOST, PG_PORT
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,7 +9,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -18,10 +18,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    "rest_framework",
+    "rest_framework", #modules
     "corsheaders",
 
-    "todo",
+    "todo", #apps
     "user"
 ]
 
@@ -101,12 +101,12 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': 5432,
+        'ENGINE':   'django.db.backends.postgresql',
+        'NAME':     PG_NAME,
+        'USER':     PG_USER,
+        'PASSWORD': PG_PASSWORD,
+        'HOST':     PG_HOST,
+        'PORT':     PG_PORT,
     }
 }
 

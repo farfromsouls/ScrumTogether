@@ -57,6 +57,22 @@ function Signup(login, email, password) {
         .catch(error => console.error('Ошибка:', error));
 };
 
+document.getElementById("input_signup_password")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.key === "Enter") {
+        document.getElementById("signbtn").click();
+    }
+});
+
+document.getElementById("input_login_password")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.key === "Enter") {
+        document.getElementById("logbtn").click();
+    }
+});
+
 signbtn.addEventListener("click", () => {
     var input_s_l = document.getElementById("input_signup_login").value;
     var input_s_e = document.getElementById("input_signup_email").value;
