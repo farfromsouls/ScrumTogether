@@ -5,7 +5,6 @@ echo ========================================
 echo   Starting ScrumTogether Development
 echo ========================================
 
-rem 
 where python >nul 2>nul
 if errorlevel 1 (
     echo ERROR: Python is not installed or not in PATH
@@ -20,11 +19,9 @@ if errorlevel 1 (
     exit /b 1
 )
 
-rem 
 set "BACKEND_DIR=%~dp0backend"
 set "FRONTEND_DIR=%~dp0frontend"
 
-rem 
 if not exist "%BACKEND_DIR%" (
     echo ERROR: Backend directory not found: %BACKEND_DIR%
     pause
@@ -37,7 +34,12 @@ if not exist "%FRONTEND_DIR%" (
     exit /b 1
 )
 
-rem 
+rem Создаем .env файл для отключения автозапуска браузера
+if not exist "%FRONTEND_DIR%\.env" (
+    echo BROWSER=none > "%FRONTEND_DIR%\.env"
+    echo Created .env file to prevent browser auto-open
+)
+
 if not exist "%FRONTEND_DIR%/node_modules" (
     echo Installing frontend dependencies...
     cd /d "%FRONTEND_DIR%"
@@ -50,7 +52,6 @@ if not exist "%FRONTEND_DIR%/node_modules" (
     cd /d "%~dp0"
 )
 
-rem 
 if not exist "%BACKEND_DIR%/venv" (
     echo Setting up Python virtual environment...
     cd /d "%BACKEND_DIR%"
@@ -71,15 +72,12 @@ if not exist "%BACKEND_DIR%/venv" (
     cd /d "%~dp0"
 )
 
-rem 
 echo Starting Django backend...
-start "Backend" cmd /k "cd /d "%BACKEND_DIR%" && call venv\Scripts\activate && python manage.py runserver"
+start "Backend_Server" cmd /k "title Backend_Server && cd /d "%BACKEND_DIR%" && call venv\Scripts\activate && python manage.py runserver"
 
-rem Запуск фронтенда
 echo Starting React frontend...
-start "Frontend" cmd /k "cd /d "%FRONTEND_DIR%" && npm start"
+start "Frontend_Server" cmd /k "title Frontend_Server && cd /d "%FRONTEND_DIR%" && npm start"
 
-rem 
 echo Waiting for servers to start...
 timeout /t 8 /nobreak >nul
 
