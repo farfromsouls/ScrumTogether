@@ -1,8 +1,17 @@
+import os
+
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
 
-from .secret import SECRET_KEY, PG_NAME, PG_USER, PG_PASSWORD, PG_HOST, PG_PORT
+load_dotenv()
 
+SECRET_KEY = os.environ.get('SECRET_KEY')
+PG_NAME = os.environ.get('PG_NAME')
+PG_USER = os.environ.get('PG_USER')
+PG_PASSWORD = os.environ.get('PG_PASSWORD')
+PG_HOST = os.environ.get('PG_HOST')
+PG_PORT = os.environ.get('PG_PORT')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 

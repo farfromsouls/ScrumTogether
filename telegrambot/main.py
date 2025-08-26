@@ -3,11 +3,12 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher
+from dotenv import load_dotenv
 
-from .secret import TOKEN
-
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
+token = os.environ.get('API_KEY')
 bot = Bot(token)
 dp = Dispatcher()
 

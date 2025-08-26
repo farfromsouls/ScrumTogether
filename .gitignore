@@ -1,11 +1,10 @@
 venv
 node_modules
 nginx
+.env
 
 __pycache__
 migrations
-
-secret.py
 
 /.pnp
 .pnp.js

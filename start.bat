@@ -5,7 +5,7 @@ echo ========================================
 echo   Starting ScrumTogether Development
 echo ========================================
 
-rem Проверка необходимых программ
+rem 
 where python >nul 2>nul
 if errorlevel 1 (
     echo ERROR: Python is not installed or not in PATH
@@ -20,11 +20,11 @@ if errorlevel 1 (
     exit /b 1
 )
 
-rem Определение путей
+rem 
 set "BACKEND_DIR=%~dp0backend"
 set "FRONTEND_DIR=%~dp0frontend"
 
-rem Проверка существования директорий
+rem 
 if not exist "%BACKEND_DIR%" (
     echo ERROR: Backend directory not found: %BACKEND_DIR%
     pause
@@ -37,7 +37,7 @@ if not exist "%FRONTEND_DIR%" (
     exit /b 1
 )
 
-rem Установка зависимостей фронтенда, если нужно
+rem 
 if not exist "%FRONTEND_DIR%/node_modules" (
     echo Installing frontend dependencies...
     cd /d "%FRONTEND_DIR%"
@@ -50,7 +50,7 @@ if not exist "%FRONTEND_DIR%/node_modules" (
     cd /d "%~dp0"
 )
 
-rem Установка зависимостей бэкенда, если нужно
+rem 
 if not exist "%BACKEND_DIR%/venv" (
     echo Setting up Python virtual environment...
     cd /d "%BACKEND_DIR%"
@@ -71,7 +71,7 @@ if not exist "%BACKEND_DIR%/venv" (
     cd /d "%~dp0"
 )
 
-rem Запуск бэкенда
+rem 
 echo Starting Django backend...
 start "Backend" cmd /k "cd /d "%BACKEND_DIR%" && call venv\Scripts\activate && python manage.py runserver"
 
@@ -79,7 +79,7 @@ rem Запуск фронтенда
 echo Starting React frontend...
 start "Frontend" cmd /k "cd /d "%FRONTEND_DIR%" && npm start"
 
-rem Ожидание запуска серверов и открытие в браузере
+rem 
 echo Waiting for servers to start...
 timeout /t 8 /nobreak >nul
 
