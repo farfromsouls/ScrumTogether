@@ -1,7 +1,7 @@
 import styles from './LeftMenu.css'
 import React, { useState, useEffect } from 'react';
 
-export default function LeftMenu({ onTableSelect }) {
+export default function LeftMenu({ onTableSelect, currentTableId  }) {
     const [tables, setTables] = useState([]);
     const [newTableName, setNewTableName] = useState('');
 
@@ -47,7 +47,10 @@ export default function LeftMenu({ onTableSelect }) {
     };
 
     const handleTableClick = (tableId) => {
-        // Делаем запрос к API для получения данных таблицы
+        if (tableId === currentTableId) {
+            return;
+        }
+
         fetch(`http://127.0.0.1:8000/todo/table/${tableId}`, {
             method: 'GET',
             headers: {
@@ -57,8 +60,7 @@ export default function LeftMenu({ onTableSelect }) {
         })
         .then(res => res.json())
         .then((tableData) => {
-            // Передаем данные таблицы в родительский компонент
-            onTableSelect(tableData);
+            onTableSelect(tableData, tableId);
         })
         .catch(error => {
             console.error('Error fetching table:', error);

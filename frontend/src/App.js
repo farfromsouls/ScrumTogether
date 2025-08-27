@@ -80,9 +80,11 @@ function access_check() {
 export default function App() {
     const [accessGranted, setAccessGranted] = useState(null);
     const [selectedTable, setSelectedTable] = useState(null);
+    const [currentTableId, setCurrentTableId] = useState(null);
 
-    const handleTableSelect = (tableData) => {
+    const handleTableSelect = (tableData, tableId) => {
         setSelectedTable(tableData);
+        setCurrentTableId(tableId);
     };
 
     useEffect(() => {access_check().then(setAccessGranted);}, []);
@@ -95,7 +97,10 @@ export default function App() {
         return (
             <div className="App" style={styles}>
                 <Header />
-                <LeftMenu onTableSelect={handleTableSelect} />
+                <LeftMenu 
+                    onTableSelect={handleTableSelect} 
+                    currentTableId={currentTableId}
+                />
                 <main className="main-content">
                     <Workspace tableData={selectedTable} />
                 </main>
