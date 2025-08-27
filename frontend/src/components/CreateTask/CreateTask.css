@@ -1,25 +1,24 @@
-.createGroup {
-    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-    width: 250px;
+.createTask {
+    width: 220px;
     min-height: 150px; 
     border-radius: 20px;
-    border: thick double #32ce97;
     transition: all 0.2s ease; 
     display: inline-block; 
     vertical-align: top; 
     overflow: hidden;
     border: 5px dashed rgba(0, 81, 0, 0.377);
     border-radius: 10px;
+    margin: 10px;
 }
 
-.createGroup:hover {
-    cursor: pointer;
+.createTask:hover {
     transition-duration: 100ms;
     transform: scale(0.95);
+    cursor: pointer;
 }
 
 .plus {
     width: 50px;
-    margin-left: 200px;
+    margin-left: 85px;
     margin-top: 50px;
 }

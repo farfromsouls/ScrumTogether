@@ -1,9 +1,53 @@
 .group {
-    background-color: rgba(92, 196, 196, 0.534);
-    display: inline;
-    float: left;
-    width: 200px;
+    background-color: rgba(92, 196, 120, 0.534);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    width: 250px;
+    min-height: 150px; 
     border-radius: 20px;
-    border: thick double #32a1ce;
-    margin: 20px;
+    margin-right: 5px;
+    transition: all 0.2s ease; 
+    display: inline-block; 
+    vertical-align: top; 
+    overflow: hidden; 
+}
+
+.group-title-box {
+    background-color: rgba(5, 133, 48, 0.719);
+    height: 35px;
+    padding-top: 10px;
+}
+
+h3 {
+    text-align: center;
+    margin: 0;
+}
+
+.group:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(34, 60, 80, 0.3); 
+}
+
+.groups-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 10px;
+    gap: 20px; 
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media (max-width: 768px) {
+    .group {
+        width: calc(100% - 40px);
+        margin: 10px 20px;
+    }
+    
+    .groups-container {
+        gap: 10px;
+    }
 }

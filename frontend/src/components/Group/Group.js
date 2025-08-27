@@ -1,22 +1,19 @@
 import Task from '../Task/Task'
+import CreateTask from '../CreateTask/CreateTask';
 import styles from './Group.css'
 
-
-export default function Group({ group, tasks }) {
-    // Фильтруем задачи, относящиеся к этой группе
-    const groupTasks = tasks.filter(task => task.group === group.id);
-
+export default function Group({ group, tasks, onTaskCreated }) {
     return (
-        <div style={styles} className="group">
-            <h3 className="group-title">{group.name}</h3>
+        <div className="group" style={styles}>
+            <div className="group-title-box">
+                <h3 className="group-title">{group.name}</h3>
+            </div>
             <div className="tasks-container">
-                {groupTasks.map(task => (
+                {tasks.map(task => (
                     <Task key={task.id} task={task} />
                 ))}
             </div>
-            {groupTasks.length === 0 && (
-                <p>create task</p>
-            )}
+            <CreateTask group_id={group.id} onTaskCreated={onTaskCreated}/>
         </div>
     );
 }

@@ -1,13 +1,51 @@
 main {
     position: fixed;
     top: 40px;
-    left: 250px;
-    right: 0px;
-    bottom: 40px;
-
-    background-color: rgba(255, 255, 255, 0);
+    left: 250px; 
+    right: 0;
+    bottom: 40px; 
+    background-color: transparent;
     padding: 20px;
-    background-image: radial-gradient(circle, rgb(203 213 225) 2px, #ffffff00 2px);
+    background-image: radial-gradient(circle, rgb(203 213 225) 2px, transparent 2px);
     background-size: 2.5rem 2.5rem;
     background-position: center center;
+    overflow: auto;
+    z-index: 1;
+}
+
+.groups-container {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: nowrap; 
+    overflow-x: auto;
+    gap: 20px; 
+    padding: 10px;
+    align-items: flex-start;
+    min-height: 100%; 
+    width: max-content;
+}
+
+.groups-container::-webkit-scrollbar {
+    height: 8px; 
+}
+
+.groups-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.groups-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.groups-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+@media (max-width: 768px) {
+    main {
+        left: 0; 
+        padding: 15px; 
+    }
 }

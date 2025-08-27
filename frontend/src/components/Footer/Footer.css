@@ -1,13 +1,19 @@
+/* Стили для футера, если он понадобится */
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
     background-color: #262626;
     color: white;
-    text-align: center;
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-    height: 40px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
 }
 
-p {
-    margin: 0;
+/* Тогда для main нужно вернуть bottom: 40px */
+main.with-footer {
+    bottom: 40px;
 }

@@ -1,5 +1,5 @@
 import styles from './LeftMenu.css'
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function LeftMenu({ onTableSelect, currentTableId  }) {
     const [tables, setTables] = useState([]);
@@ -24,6 +24,11 @@ export default function LeftMenu({ onTableSelect, currentTableId  }) {
     };
 
     const handleCreateTable = () => {
+
+        if (newTableName == '') {
+            return;
+        }
+
         fetch('http://127.0.0.1:8000/todo/table', {
             method: 'POST',
             headers: {
@@ -69,34 +74,40 @@ export default function LeftMenu({ onTableSelect, currentTableId  }) {
 
     return (
         <aside style={styles} id="sidebar">
-            <p className="sidebar-name">Tables list</p>
-            <div>
-                <input 
-                    placeholder='New table name' 
-                    value={newTableName}
-                    onChange={handleInputChange}
-                    onKeyPress={(e) => {
-                        if (e.key === 'Enter') handleCreateTable();
-                    }}
-                />
-                <button className='createNewTable' onClick={handleCreateTable}>
-                    Create
-                </button>
+            <div className="aside-content">
+                <p className="sidebar-name">Tables list</p>
+                <div className='createNew'>
+                    <input 
+                        placeholder='New table name' 
+                        value={newTableName}
+                        onChange={handleInputChange}
+                        onKeyPress={(e) => {
+                            if (e.key === 'Enter') handleCreateTable();
+                        }}
+                    />
+                    <button className='createNewTable' onClick={handleCreateTable}>
+                        Create
+                    </button>
+                </div>
+                
+                <div className="tables-scroll-container">
+                    {tables.length > 0 && (
+                        <ul className="tables-list">
+                            {tables.map(table => (
+                                <li key={table.id}>
+                                    <button 
+                                        id={table.id} 
+                                        onClick={() => handleTableClick(table.id)} 
+                                        className={`table ${table.id === currentTableId ? 'active' : ''}`}
+                                    >
+                                        <p>{table.name}</p>
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
             </div>
-            {tables.length > 0 && (
-                <ul>
-                    {tables.map(table => (
-                        <button 
-                            id={table.id} 
-                            onClick={() => handleTableClick(table.id)} 
-                            className="table" 
-                            key={table.id}
-                        >
-                            {table.name}
-                        </button>
-                    ))}
-                </ul>
-            )}
         </aside>
     );
 }
