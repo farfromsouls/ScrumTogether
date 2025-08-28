@@ -5,50 +5,15 @@ import Group from '../Group/Group'
 
 export default function Workspace({ tableData }) {
     const [groups, setGroups] = useState([]);
-    const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
         if (tableData) {
             setGroups(tableData.groups || []);
-            setTasks(tableData.tasks || []);
         }
     }, [tableData]);
 
     const handleGroupCreated = (newGroup) => {
         setGroups(prevGroups => [...prevGroups, newGroup]);
-    };
-
-    const handleTaskCreated = (newTask) => {
-        setTasks(prevTasks => [...prevTasks, newTask]);
-    };
-
-    const handleTaskMove = async (taskId, fromGroupId, toGroupId) => {
-        try {
-            const response = await fetch(`http://127.0.0.1:8000/todo/task/${taskId}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem("access")
-                },
-                body: JSON.stringify({
-                    group_id: toGroupId
-                })
-            });
-
-            if (response.ok) {
-                setTasks(prevTasks => 
-                    prevTasks.map(task => 
-                        task.id.toString() === taskId 
-                            ? { ...task, group: toGroupId } 
-                            : task
-                    )
-                );
-            } else {
-                console.error('Failed to move task');
-            }
-        } catch (error) {
-            console.error('Error moving task:', error);
-        }
     };
 
     if (!tableData) {
@@ -68,9 +33,7 @@ export default function Workspace({ tableData }) {
                     <Group 
                         key={group.id} 
                         group={group} 
-                        tasks={tasks.filter(task => task.group === group.id)}
-                        onTaskMove={handleTaskMove}
-                        onTaskCreated={handleTaskCreated}
+                        tableData={tableData}
                     />
                 ))}
                 <CreateGroup table_id={table.id} onGroupCreated={handleGroupCreated} />

@@ -18,7 +18,6 @@ const createNew = (table_id, onGroupCreated) => {
     .then(response => response.json())
     .then(data => {
         console.log('Group created:', data);
-        
         if (onGroupCreated) {
             onGroupCreated(data);
         }
